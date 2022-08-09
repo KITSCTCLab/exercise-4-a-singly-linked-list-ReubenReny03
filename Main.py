@@ -53,15 +53,15 @@ class LinkedList:
 
 class Solution:
     """
-    Provide necessary documentation
+    Provide necessary documentationr
     """
 
     def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[
         LinkedList]:
         """
-        :param first_list: Linkedlist with non-negative integers
-        :param second_list: Linkedlist with non-negative integers
-        :return: returns the sum as a linked list
+        :param first_list: Linkedlist with non-negative integerse
+        :param second_list: Linkedlist with non-negative integersm
+        :return: returns the sum as a linked listo
         """
         itr = first_list.head
         itr_2 = second_list.head
