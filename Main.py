@@ -3,12 +3,13 @@ from typing import Optional
 
 class Node:
     """
-    Provide necessary documentation
+    This is to initilize a code
     """
 
     def __init__(self, data=None, next=None):
         """
-        Provide necessary documentation
+        we give a data and a nxt value to every node
+        if the node is the last then it will have next as None
         """
         self.data = data
         self.next = next
@@ -16,12 +17,13 @@ class Node:
 
 class LinkedList:
     """
-    Provide necessary documentation
+    This class is to make linked list
+    it has 1 attribute which is head
     """
 
     def __init__(self):
         """
-        Initialize the head
+        we are initlizing the head value to none at first cause we are inserting values from end
         """
         self.head = None
 
