@@ -32,25 +32,24 @@ class LinkedList:
         Insert node at end of the list
         :param data: integer data that will be used to create a node
         """
-        new = Node(data)
         if self.head is None:
             self.head = Node(data, None)
             return
-        itr = self.head
-        while itr.next:
-            itr = itr.next
+        remo = self.head
+        while remo.next:
+            remo = remo.next
 
-        itr.next = Node(data, None)
+        remo.next = Node(data, None)
 
     def status(self):
         """
         It prints all the elements of list.
         """
         elements = []
-        curr = self.head
-        while curr is not None:
-            elements.append(curr.data)
-            curr = curr.next
+        more = self.head
+        while more is not None:
+            elements.append(more.data)
+            more = more.next
         print(elements)
 
 class Solution:
@@ -65,25 +64,25 @@ class Solution:
         :param second_list: Linkedlist with non-negative integersm
         :return: returns the sum as a linked listo
         """
-        itr = first_list.head
-        itr_2 = second_list.head
+        remo = first_list.head
+        remo_2 = second_list.head
         sum_list = LinkedList()
         carry = 0
         try:
-            while itr:
-                if itr_2.data is None:
-                    itr_2.data = 0
-                a = itr.data + itr_2.data
+            while remo:
+                if remo_2.data is None:
+                    remo_2.data = 0
+                a = remo.data + remo_2.data
                 if (a+carry)//10 == 0:
                     sum_list.insert_at_end(a+carry)
-                    itr = itr.next
-                    itr_2 = itr_2.next
+                    remo = remo.next
+                    remo_2 = remo_2.next
                     carry = 0
                 else:
                     sum_list.insert_at_end((a+carry)%10)
                     carry = (a+carry)//10
-                    itr = itr.next
-                    itr_2 = itr_2.next
+                    remo = remo.next
+                    remo_2 = remo_2.next
 
 
             if carry != 0:
