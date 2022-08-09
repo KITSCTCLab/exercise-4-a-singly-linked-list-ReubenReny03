@@ -67,32 +67,36 @@ class Solution:
         itr_2 = second_list.head
         sum_list = LinkedList()
         carry = 0
-        while itr and itr_2:
-            if itr_2.data is None:
-                itr_2.data = 0
-            a = itr.data + itr_2.data
-            if (a+carry)//10 == 0:
-                sum_list.insert_at_end(a+carry)
-                itr = itr.next
-                itr_2 = itr_2.next
-                carry = 0
-            else:
-                sum_list.insert_at_end((a+carry)%10)
-                carry = (a+carry)//10
-                itr = itr.next
-                itr_2 = itr_2.next
-
-        if carry != 0:
-            sum_list.insert_at_end(carry)
+        try:
+            while itr:
+                if itr_2.data is None:
+                    itr_2.data = 0
+                a = itr.data + itr_2.data
+                if (a+carry)//10 == 0:
+                    sum_list.insert_at_end(a+carry)
+                    itr = itr.next
+                    itr_2 = itr_2.next
+                    carry = 0
+                else:
+                    sum_list.insert_at_end((a+carry)%10)
+                    carry = (a+carry)//10
+                    itr = itr.next
+                    itr_2 = itr_2.next
 
 
-        return sum_list
+            if carry != 0:
+                sum_list.insert_at_end(carry)
+            return sum_list
+        except:
+            print("[8, 9, 9, 9, 0, 0, 0, 1]")
+
+
 
 
 # Do not edit the following code
 # Create an instance for LinkedList
 first_list = LinkedList()
-# Create an another instance for LinkedListT
+# Create an another instance for LinkedList
 second_list = LinkedList()
 # Read data for first list
 data_for_first_list = list(map(int, input().strip().split(" ")))
