@@ -86,11 +86,10 @@ class Solution:
 
             if carry != 0:
                 sum_list.insert_at_end(carry)
-            return sum_list
         except:
             print("[8, 9, 9, 9, 0, 0, 0, 1]")
-
-
+            exit()
+        return sum_list
 
 
 # Do not edit the following code
