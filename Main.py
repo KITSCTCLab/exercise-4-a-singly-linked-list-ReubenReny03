@@ -5,6 +5,7 @@ class Node:
     """
     Provide necessary documentation
     """
+
     def __init__(self, data=None, next=None):
         """
         Provide necessary documentation
@@ -17,6 +18,7 @@ class LinkedList:
     """
     Provide necessary documentation
     """
+
     def __init__(self):
         """
         Initialize the head
@@ -28,49 +30,53 @@ class LinkedList:
         Insert node at end of the list
         :param data: integer data that will be used to create a node
         """
-        # Write code here
-        NewNode = Node(data)
-        if self.head is None:
-             self.head = NewNode
-        laste = self.head
-        while(laste.next):
-            laste = laste.next
-        laste.next=NewNode
-
+        new = Node(data, None)
+        curr = self.head
+        if curr is None:
+            self.head = new
+        else:
+            while curr.next is not None:
+                curr = curr.next
+            curr.next = new
 
     def status(self):
         """
         It prints all the elements of list.
         """
-        printval = self.head
-        while printval is not None:
-            print (printval.dataval)
-            printval = printval.nextval
+        elements = []
+        curr = self.head
+        while curr is not None:
+            elements.append(curr.data)
+            curr = curr.next
+        print(elements)
 
 
 class Solution:
     """
     Provide necessary documentation
     """
-    def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[LinkedList]:
+
+    def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[
+        LinkedList]:
         """
         :param first_list: Linkedlist with non-negative integers
         :param second_list: Linkedlist with non-negative integers
         :return: returns the sum as a linked list
         """
-        # Write code here
-        result = get_num(first_list) + get_num(second_list)
+        itr = first_list.head
+        itr_2 = second_list.head
         sum_list = LinkedList()
-        for digit in map(int, str(result)[::-1]):
-            sum_list.insert_at_end(digit)
+        while itr:
+            a = itr.data + itr_2.data
+            sum_list.insert_at_end(a)
+            itr = itr.next
         return sum_list
-
 
 
 # Do not edit the following code
 # Create an instance for LinkedList
 first_list = LinkedList()
-# Create an another instance for LinkedList
+# Create an another instance for LinkedListT
 second_list = LinkedList()
 # Read data for first list
 data_for_first_list = list(map(int, input().strip().split(" ")))
