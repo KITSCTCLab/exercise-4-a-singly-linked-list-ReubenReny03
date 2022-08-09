@@ -49,7 +49,7 @@ class LinkedList:
         while curr is not None:
             elements.append(curr.data)
             curr = curr.next
-        print(elements)
+        print(elements.reverse())
 
 class Solution:
     """
@@ -67,7 +67,7 @@ class Solution:
         itr_2 = second_list.head
         sum_list = LinkedList()
         carry = 0
-        while itr:
+        while itr and itr_2:
             a = itr.data + itr_2.data
             if (a+carry)//10 == 0:
                 sum_list.insert_at_end(a+carry)
