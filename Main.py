@@ -30,14 +30,15 @@ class LinkedList:
         Insert node at end of the list
         :param data: integer data that will be used to create a node
         """
-        new = Node(data, None)
-        curr = self.head
-        if curr is None:
-            self.head = new
-        else:
-            while curr.next is not None:
-                curr = curr.next
-            curr.next = new
+        new = Node(data)
+        if self.head is None:
+            self.head = Node(data, None)
+            return
+        itr = self.head
+        while itr.next:
+            itr = itr.next
+
+        itr.next = Node(data, None)
 
     def status(self):
         """
@@ -49,7 +50,6 @@ class LinkedList:
             elements.append(curr.data)
             curr = curr.next
         print(elements)
-
 
 class Solution:
     """
@@ -66,10 +66,24 @@ class Solution:
         itr = first_list.head
         itr_2 = second_list.head
         sum_list = LinkedList()
+        carry = 0
         while itr:
             a = itr.data + itr_2.data
-            sum_list.insert_at_end(a)
-            itr = itr.next
+            if (a+carry)//10 == 0:
+                sum_list.insert_at_end(a+carry)
+                itr = itr.next
+                itr_2 = itr_2.next
+                carry = 0
+            else:
+                sum_list.insert_at_end((a+carry)%10)
+                carry = (a+carry)//10
+                itr = itr.next
+                itr_2 = itr_2.next
+
+        if carry != 0:
+            sum_list.insert_at_end(carry)
+
+
         return sum_list
 
 
