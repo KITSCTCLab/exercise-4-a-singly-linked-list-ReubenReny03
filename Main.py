@@ -30,14 +30,15 @@ class LinkedList:
         Insert node at end of the list
         :param data: integer data that will be used to create a node
         """
-        new = Node(data, None)
-        curr = self.head
-        if curr is None:
-            self.head = new
-        else:
-            while curr.next is not None:
-                curr = curr.next
-            curr.next = new
+        new = Node(data)
+        if self.head is None:
+            self.head = Node(data, None)
+            return
+        itr = self.head
+        while itr.next:
+            itr = itr.next
+
+        itr.next = Node(data, None)
 
     def status(self):
         """
@@ -45,37 +46,47 @@ class LinkedList:
         """
         elements = []
         curr = self.head
-        while curr:
+        while curr is not None:
             elements.append(curr.data)
             curr = curr.next
-        print(elements.reverse())
-
+        print(elements)
 
 class Solution:
     """
-    Provide necessary documentation
+    Provide necessary documentationr
     """
 
     def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[
         LinkedList]:
         """
-        :param first_list: Linkedlist with non-negative integers
-        :param second_list: Linkedlist with non-negative integers
-        :return: returns the sum as a linked list
+        :param first_list: Linkedlist with non-negative integerse
+        :param second_list: Linkedlist with non-negative integersm
+        :return: returns the sum as a linked listo
         """
-        result = self.get_num(first_list) + self.get_num(second_list)
+        itr = first_list.head
+        itr_2 = second_list.head
         sum_list = LinkedList()
-        for digit in list(map(int, str(result)[::-1])):
-            sum_list.insert_at_end(digit)
-        return sum_list
+        carry = 0
+        while itr and itr_2:
+            if itr_2.data is None:
+                itr_2.data = 0
+            a = itr.data + itr_2.data
+            if (a+carry)//10 == 0:
+                sum_list.insert_at_end(a+carry)
+                itr = itr.next
+                itr_2 = itr_2.next
+                carry = 0
+            else:
+                sum_list.insert_at_end((a+carry)%10)
+                carry = (a+carry)//10
+                itr = itr.next
+                itr_2 = itr_2.next
 
-    def get_num(self, l: Optional[LinkedList]) -> int:
-        num = 0
-        curr = l.head
-        while curr is not None:
-            num = num * 10 + curr.data
-            curr = curr.next
-        return num
+        if carry != 0:
+            sum_list.insert_at_end(carry)
+
+
+        return sum_list
 
 
 # Do not edit the following code
