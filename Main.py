@@ -3,13 +3,15 @@ from typing import Optional
 
 class Node:
     """
-    This is to initilize a code
+    This class describes Node objects to act as elements of the LinkedList
+    Attributes:
+    data - stored associated data
+    next - link to next node
     """
 
     def __init__(self, data=None, next=None):
         """
-        we give a data and a nxt value to every node
-        if the node is the last then it will have next as None
+        Initialises the Node with given attributes
         """
         self.data = data
         self.next = next
@@ -17,13 +19,17 @@ class Node:
 
 class LinkedList:
     """
-    This class is to make linked list
-    it has 1 attribute which is head
+    This class implements LinkedList using Node objects
+    Methods:
+        insert_at_end - inserts node with data at the end of the list
+        status - displays all elements of the list
+    Attributes
+        self.head - contains first node of LinkedList, None if list empty
     """
 
     def __init__(self):
         """
-        we are initlizing the head value to none at first cause we are inserting values from end
+        Initialize the head
         """
         self.head = None
 
@@ -32,65 +38,59 @@ class LinkedList:
         Insert node at end of the list
         :param data: integer data that will be used to create a node
         """
-        if self.head is None:
-            self.head = Node(data, None)
-            return
-        remo = self.head
-        while remo.next:
-            remo = remo.next
-
-        remo.next = Node(data, None)
+        new = Node(data, None)
+        curr = self.head
+        if curr is None:
+            self.head = new
+        else:
+            while curr.next is not None:
+                curr = curr.next
+            curr.next = new
 
     def status(self):
         """
         It prints all the elements of list.
         """
         elements = []
-        more = self.head
-        while more is not None:
-            elements.append(more.data)
-            more = more.next
+        curr = self.head
+        while curr:
+            elements.append(curr.data)
+            curr = curr.next
         print(elements)
+
 
 class Solution:
     """
-    Provide necessary documentationr
+    Class implementing functions to add numbers in a LinkedList
+    
     """
 
     def addTwoNumbers(self, first_list: Optional[LinkedList], second_list: Optional[LinkedList]) -> Optional[
         LinkedList]:
         """
-        :param first_list: Linkedlist with non-negative integerse
-        :param second_list: Linkedlist with non-negative integersm
-        :return: returns the sum as a linked listo
+        :param first_list: Linkedlist with non-negative integers
+        :param second_list: Linkedlist with non-negative integers
+        :return: returns the sum as a linked list
         """
-        remo = first_list.head
-        remo_2 = second_list.head
+        result = self.get_num(first_list) + self.get_num(second_list)
         sum_list = LinkedList()
-        carry = 0
-        try:
-            while remo:
-                if remo_2.data is None:
-                    remo_2.data = 0
-                a = remo.data + remo_2.data
-                if (a+carry)//10 == 0:
-                    sum_list.insert_at_end(a+carry)
-                    remo = remo.next
-                    remo_2 = remo_2.next
-                    carry = 0
-                else:
-                    sum_list.insert_at_end((a+carry)%10)
-                    carry = (a+carry)//10
-                    remo = remo.next
-                    remo_2 = remo_2.next
-
-
-            if carry != 0:
-                sum_list.insert_at_end(carry)
-        except:
-            print("[8, 9, 9, 9, 0, 0, 0, 1]")
-            exit()
+        for digit in list(map(int, str(result)[::-1])):
+            sum_list.insert_at_end(digit)
         return sum_list
+
+    def get_num(self, l: Optional[LinkedList]) -> int:
+        """
+        :param l: LinkedList with non-negative integers
+        :return: returns digits of the list as a single integer
+        """
+        curr = l.head
+        if curr is None:
+            return 0
+        num = ""
+        while curr is not None:
+            num = str(curr.data) + num
+            curr = curr.next
+        return int(num)
 
 
 # Do not edit the following code
